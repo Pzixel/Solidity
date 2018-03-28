@@ -8,8 +8,9 @@
 
     <DebuggerFlavor>ScriptDebugger</DebuggerFlavor>
     <RunCommand>solc</RunCommand>
-    <RunCommandArguments>-o target --bin --abi</RunCommandArguments>
+    <RunCommandArguments>--bin --abi --overwrite</RunCommandArguments>
     <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
+    <OutputPath>bin/$(Configuration)</OutputPath>
     <StartItem>Example.sol</StartItem>
   </PropertyGroup>
 </Project>
