@@ -53,9 +53,8 @@
   </ItemGroup>
 
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.CurrentVersion.targets" />
-
-  <Target Name="AfterBuild">
-    <Message Text="$(RunCommandArguments)" />
+  <Target Name="CreateManifestResourceNames" />
+  <Target Name="CoreCompile">
     <Exec Command='$(RunCommand) "-o @(OutDir) @(SolCompile)" $(RunCommandArguments)' WorkingDirectory="$(RunWorkingDirectory)" />
   </Target>
 </Project>
