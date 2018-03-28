@@ -5,8 +5,7 @@
   </PropertyGroup>
   <Import Project="$(CustomProjectExtensionsPath)Solidity.props" />
   <ItemGroup>
-    <Script Include="**\*.js" />
-    <Script Include="**\*.vbs" />
+    <SolCompile Include="**\*.sol" />
   </ItemGroup>
   <Import Project="$(CustomProjectExtensionsPath)Solidity.targets" />
 </Project>

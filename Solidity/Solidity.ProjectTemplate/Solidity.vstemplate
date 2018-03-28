@@ -5,7 +5,6 @@
     <Description>A template for creating a Solidity project.</Description>
     <Icon>Solidity.ico</Icon>
     <ProjectType>Solidity</ProjectType>
-    <RequiredFrameworkVersion>4.5.2</RequiredFrameworkVersion>
     <SortOrder>1</SortOrder>
     <TemplateID>{340413ec-4526-4408-b957-b89f3ced5d14}</TemplateID>
     <CreateNewFolder>true</CreateNewFolder>
@@ -15,11 +14,7 @@
   </TemplateData>
   <TemplateContent>
     <Project File="Solidity.solidproj" ReplaceParameters="true">
-      <!-- 
-      These are the items which will show up when a new project is created using the custom project system.
-      Items referenced in here must also be referenced in the project file.
-      -->
-      <ProjectItem OpenInEditor="true">Start.js</ProjectItem>
+      <ProjectItem OpenInEditor="true">Example.sol</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 
     <DebuggerFlavor>ScriptDebugger</DebuggerFlavor>
-    <RunCommand>$(WinDir)\System32\cscript.exe</RunCommand>
+    <RunCommand>solc -o target --bin --abi</RunCommand>
     <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
-    <StartItem>Start.js</StartItem>
+    <StartItem>Example.sol</StartItem>
   </PropertyGroup>
 </Project>
