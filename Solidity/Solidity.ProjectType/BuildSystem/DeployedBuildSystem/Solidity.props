@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectSystemBase>$(MSBuildThisFileDirectory)</ProjectSystemBase>
 
@@ -7,7 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 
     <DebuggerFlavor>ScriptDebugger</DebuggerFlavor>
-    <RunCommand>solc -o target --bin --abi</RunCommand>
+    <RunCommand>solc</RunCommand>
+    <RunCommandArguments>-o target --bin --abi</RunCommandArguments>
     <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
     <StartItem>Example.sol</StartItem>
   </PropertyGroup>

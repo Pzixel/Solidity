@@ -154,7 +154,6 @@
     <Compile Include="MyUnconfiguredProject.cs" />
     <Compile Include="ProjectProperties.cs" />
     <Compile Include="VsPackage.cs" />
-    <Compile Include="ScriptDebuggerLaunchProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,8 +169,12 @@
   final implementation, and provide the basic processing for handling rules in CPS.
   -->
   <ItemGroup>
-    <None Include="BuildSystem\DeployedBuildSystem\Solidity.props" />
-    <None Include="BuildSystem\DeployedBuildSystem\Solidity.targets" />
+    <None Include="BuildSystem\DeployedBuildSystem\Solidity.props">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BuildSystem\DeployedBuildSystem\Solidity.targets">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <!--
   The XAML files provide buth compile-time implementations for CPS rules as well as
@@ -200,19 +203,7 @@
     <XamlPropertyRule Include="BuildSystem\Rules\scc.xaml">
       <SubType>Designer</SubType>
     </XamlPropertyRule>
-    <XamlPropertyRule Include="BuildSystem\Rules\debugger_general.xaml">
-      <SubType>Designer</SubType>
-    </XamlPropertyRule>
     <XamlPropertyRule Include="BuildSystem\Rules\general.browseobject.xaml">
-      <SubType>Designer</SubType>
-    </XamlPropertyRule>
-    <XamlPropertyRule Include="BuildSystem\Rules\script.xaml">
-      <SubType>Designer</SubType>
-    </XamlPropertyRule>
-    <None Include="BuildSystem\Rules\script.browseobject.xaml">
-      <SubType>Designer</SubType>
-    </None>
-    <XamlPropertyRule Include="BuildSystem\Rules\ScriptDebugger.xaml">
       <SubType>Designer</SubType>
     </XamlPropertyRule>
   </ItemGroup>
