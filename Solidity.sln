@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solidity.ProjectType", "Solidity\Solidity.ProjectType\Solidity.ProjectType.csproj", "{82051DBE-7BF4-46D8-90D4-910E51D00E10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solidity.ProjectTemplate", "Solidity\Solidity.ProjectTemplate\Solidity.ProjectTemplate.csproj", "{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82051DBE-7BF4-46D8-90D4-910E51D00E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82051DBE-7BF4-46D8-90D4-910E51D00E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82051DBE-7BF4-46D8-90D4-910E51D00E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82051DBE-7BF4-46D8-90D4-910E51D00E10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35FEEE2C-BBC6-474B-AA36-1577546C5F29}
+	EndGlobalSection
+EndGlobal
