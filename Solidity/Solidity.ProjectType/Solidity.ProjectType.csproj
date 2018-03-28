@@ -221,7 +221,7 @@
     <Analyzer Include="..\..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.3.83\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <XamlPropertyRule Include="Sol.xaml">
+    <XamlPropertyRule Include="BuildSystem\Rules\Sol.xaml">
       <SubType>Designer</SubType>
     </XamlPropertyRule>
   </ItemGroup>
