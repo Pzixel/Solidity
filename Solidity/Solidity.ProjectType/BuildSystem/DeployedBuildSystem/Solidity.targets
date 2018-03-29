@@ -52,9 +52,8 @@
     </PropertyPageSchema>
   </ItemGroup>
 
-  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.CurrentVersion.targets" />
-  <Target Name="CreateManifestResourceNames" />
-  <Target Name="CoreCompile">
-    <Exec Command='$(RunCommand) "-o @(OutDir) @(SolCompile)" $(RunCommandArguments)' WorkingDirectory="$(RunWorkingDirectory)" />
+  <Target Name="Build">
+    <Error Condition="'$(OutDir)' == ''" Text="The OutDir property is missing" />
+    <Exec Command='$(RunCommand) "%(SolCompile.Identity)" "-o $(OutDir)" $(RunCommandArguments)' WorkingDirectory="$(RunWorkingDirectory)" />
   </Target>
 </Project>

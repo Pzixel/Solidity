@@ -10,7 +10,8 @@
     <RunCommand>solc</RunCommand>
     <RunCommandArguments>--bin --abi --overwrite</RunCommandArguments>
     <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
-    <OutputPath>bin/$(Configuration)</OutputPath>
-    <StartItem>Example.sol</StartItem>
+    <OutDir>bin/$(Configuration)</OutDir>
+    <BaseIntermediateOutputPath>obj/</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)</IntermediateOutputPath>
   </PropertyGroup>
 </Project>
