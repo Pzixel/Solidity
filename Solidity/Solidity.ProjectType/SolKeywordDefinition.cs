@@ -16,13 +16,5 @@ namespace Solidity
     [UserVisible(true)]
     internal sealed class SolKeywordDefinition : ClassificationFormatDefinition
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SolKeywordDefinition"/> class.
-        /// </summary>
-        public SolKeywordDefinition()
-        {
-            this.DisplayName = "SolKeyword"; // Human readable version of the name
-            this.ForegroundColor = Colors.CornflowerBlue;
-        }
     }
 }
