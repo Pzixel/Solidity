@@ -52,8 +52,63 @@
     </PropertyPageSchema>
   </ItemGroup>
 
+  <ItemGroup>
+    <BinFiles Include="$(IntermediateOutputPath)/*.bin"/>
+    <AbiFiles Include="$(IntermediateOutputPath)/*.abi"/>
+    <CopyUpToDateMarker Include="$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', '$(MSBuildProjectFile).CopyComplete'))" />
+  </ItemGroup>
+
+  <UsingTask
+    TaskName="GetOutdatedFiles"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+
+    <ParameterGroup>
+      <FileList ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <UpToDateMarker ParameterType="System.String" Required="true" />
+      <Result ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System"/>
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+          var modifiedFiles = new List<ITaskItem>();
+          if(!File.Exists(UpToDateMarker))
+          {
+            Result = FileList;
+          }
+          else 
+          {
+            DateTime markerTimeStamp = File.GetLastWriteTime(UpToDateMarker);
+            Result = FileList.Where(file => DateTime.Parse(file.GetMetadata("ModifiedTime")) > markerTimeStamp).ToArray();
+          }
+          ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
   <Target Name="Build">
     <Error Condition="'$(OutDir)' == ''" Text="The OutDir property is missing" />
-    <Exec Command='$(RunCommand) "%(SolCompile.Identity)" "-o $(OutDir)" $(RunCommandArguments)' WorkingDirectory="$(RunWorkingDirectory)" />
+    <Error Condition="'$(IntermediateOutputPath)' == ''" Text="The IntermediateOutputPath property is missing" />
+
+    <GetOutdatedFiles FileList="@(SolCompile)" UpToDateMarker="@(CopyUpToDateMarker)">
+      <Output TaskParameter="Result" ItemName="ChangedFiles"/>
+    </GetOutdatedFiles>
+
+    <Exec Command='$(RunCommand) "%(ChangedFiles.Identity)" -o "$(IntermediateOutputPath)" $(RunCommandArguments)' WorkingDirectory="$(RunWorkingDirectory)" Condition="'@(ChangedFiles)' != ''"/>
+    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" Condition="'@(ChangedFiles)' != ''">
+      <Output TaskParameter="CopiedFiles" ItemName="ReferencesCopiedInThisBuild"/>
+    </Copy>
+    <Copy SourceFiles="@(AbiFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" Condition="'@(ChangedFiles)' != ''">
+      <Output TaskParameter="CopiedFiles" ItemName="ReferencesCopiedInThisBuild"/>
+    </Copy>
+    <Touch Files="@(CopyUpToDateMarker)" AlwaysCreate="true" Condition="'@(ReferencesCopiedInThisBuild)' != ''" />
   </Target>
+
+  <Target Name="Clean">
+    <Delete Files="@(CopyUpToDateMarker)" />
+    <RemoveDir Directories="$(OutDir)" />
+  </Target>
+
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
 </Project>
