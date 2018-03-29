@@ -53,8 +53,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <BinFiles Include="$(IntermediateOutputPath)/*.bin"/>
-    <AbiFiles Include="$(IntermediateOutputPath)/*.abi"/>
     <CopyUpToDateMarker Include="$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', '$(MSBuildProjectFile).CopyComplete'))" />
   </ItemGroup>
 
@@ -87,7 +85,9 @@
     </Task>
   </UsingTask>
 
-  <Target Name="Build">
+  <Target Name="Build" DependsOnTargets="CoreBuild;AfterBuild" />
+
+  <Target Name="CoreBuild">
     <Error Condition="'$(OutDir)' == ''" Text="The OutDir property is missing" />
     <Error Condition="'$(IntermediateOutputPath)' == ''" Text="The IntermediateOutputPath property is missing" />
 
@@ -96,6 +96,14 @@
     </GetOutdatedFiles>
 
     <Exec Command='$(RunCommand) "%(ChangedFiles.Identity)" -o "$(IntermediateOutputPath)" $(RunCommandArguments)' WorkingDirectory="$(RunWorkingDirectory)" Condition="'@(ChangedFiles)' != ''"/>
+  </Target>
+
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <BinFiles Include="$(IntermediateOutputPath)/*.bin"/>
+      <AbiFiles Include="$(IntermediateOutputPath)/*.abi"/>
+    </ItemGroup>
+
     <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" Condition="'@(ChangedFiles)' != ''">
       <Output TaskParameter="CopiedFiles" ItemName="ReferencesCopiedInThisBuild"/>
     </Copy>
