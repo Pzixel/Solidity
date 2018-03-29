@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
@@ -10,10 +12,7 @@ namespace Solidity
     /// </summary>
     internal class SolKeyword : IClassifier
     {
-        /// <summary>
-        /// Classification type.
-        /// </summary>
-        private readonly IClassificationType classificationType;
+        private readonly List<(Regex, IClassificationType)> _map;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SolKeyword"/> class.
@@ -21,7 +20,10 @@ namespace Solidity
         /// <param name="registry">Classification registry.</param>
         internal SolKeyword(IClassificationTypeRegistryService registry)
         {
-            this.classificationType = registry.GetClassificationType("SolKeyword");
+            _map = new List<(Regex, IClassificationType)>
+            {
+                (new Regex(@"\bcontract\b", RegexOptions.Compiled), registry.GetClassificationType("SolKeyword"))
+            };
         }
 
         #region IClassifier
@@ -51,12 +53,20 @@ namespace Solidity
         /// <returns>A list of ClassificationSpans that represent spans identified to be of this classification.</returns>
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)
         {
-            var result = new List<ClassificationSpan>()
-            {
-                new ClassificationSpan(new SnapshotSpan(span.Snapshot, new Span(span.Start, span.Length)), this.classificationType)
-            };
+            IList<ClassificationSpan> list = new List<ClassificationSpan>();
+            ITextSnapshotLine line = span.Start.GetContainingLine();
+            string text = line.GetText();
 
-            return result;
+            foreach (var tuple in _map)
+            {
+                foreach (Match match in tuple.Item1.Matches(text))
+                {
+                    var str = new SnapshotSpan(line.Snapshot, line.Start.Position + match.Index, match.Length);
+                    list.Add(new ClassificationSpan(str, tuple.Item2));
+                }
+            }
+
+            return list;
         }
 
         #endregion
