@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solidity.ProjectType", "Sol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solidity.ProjectTemplate", "Solidity\Solidity.ProjectTemplate\Solidity.ProjectTemplate.csproj", "{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solidity.SolItemTemplate", "Solidity\Solidity.SolItemTemplate\Solidity.SolItemTemplate.csproj", "{6356EC81-D301-49FF-AF0F-17E8C9F3655F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D4B668A-BE01-49D6-8CCA-4111600E5CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6356EC81-D301-49FF-AF0F-17E8C9F3655F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6356EC81-D301-49FF-AF0F-17E8C9F3655F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6356EC81-D301-49FF-AF0F-17E8C9F3655F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6356EC81-D301-49FF-AF0F-17E8C9F3655F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
