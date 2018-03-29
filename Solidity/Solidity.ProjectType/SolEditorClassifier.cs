@@ -8,10 +8,12 @@ using Microsoft.VisualStudio.Text.Classification;
 namespace Solidity
 {
     /// <summary>
-    /// Classifier that classifies all text as an instance of the "SolKeyword" classification type.
+    /// Classifier that classifies all text as an instance of the SolKeyword classification type.
     /// </summary>
     internal class SolKeyword : IClassifier
     {
+        private const string Keywords =
+            "abstract|anonymous|as|assembly|break|case|catch|constant|continue|default|delete|do|else|emit|enum|external|final|for|function|if|import|in|indexed|inline|interface|internal|is|let|match|memory|modifier|new|of|payable|pragma|private|public|pure|relocatable|return|returns|static|storage|struct|throw|try|type|typeof|using|var|view|while|contract|library|interface";
         private readonly List<(Regex, IClassificationType)> _map;
 
         /// <summary>
@@ -22,7 +24,8 @@ namespace Solidity
         {
             _map = new List<(Regex, IClassificationType)>
             {
-                (new Regex(@"\bcontract\b", RegexOptions.Compiled), registry.GetClassificationType("SolKeyword"))
+                (new Regex(@"/\*.+\*/", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolComment)),
+                (new Regex($@"\b({Keywords})\b", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolKeyword))
             };
         }
 
@@ -62,6 +65,10 @@ namespace Solidity
                 foreach (Match match in tuple.Item1.Matches(text))
                 {
                     var str = new SnapshotSpan(line.Snapshot, line.Start.Position + match.Index, match.Length);
+
+                    if (list.Any(s => s.Span.IntersectsWith(str)))
+                        continue;
+
                     list.Add(new ClassificationSpan(str, tuple.Item2));
                 }
             }

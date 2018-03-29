@@ -9,5 +9,6 @@ namespace Solidity
     public static class Classification
     {
         public const string SolKeyword = "SolKeyword";
+        public const string SolComment = "SolComment";
     }
 }
