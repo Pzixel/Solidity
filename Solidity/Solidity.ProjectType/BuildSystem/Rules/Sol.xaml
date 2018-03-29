@@ -10,7 +10,7 @@
         <DataSource Persistence="ProjectFile" HasConfigurationCondition="True" ItemType="SolCompile" />
     </Rule.DataSource>
 
-    <StringProperty Name="MyProperty" DisplayName="My Property" Visible="True" Description="Sample property"/>
+    <StringProperty Name="MyProperty" DisplayName="My Property" Visible="false" Description="Sample property"/>
 
     <StringProperty Name="Identity" DisplayName="File Name" ReadOnly="true" Category="Misc">
         <StringProperty.DataSource>
