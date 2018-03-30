@@ -88,10 +88,13 @@
   <Target Name="Build" DependsOnTargets="CoreBuild;AfterBuild" />
 
   <Target Name="CoreBuild">
+    <ItemGroup>
+      <SolFiles Include="@(SolCompile)" Condition="'%(Extension)' == '.sol'" />
+    </ItemGroup>
     <Error Condition="'$(OutDir)' == ''" Text="The OutDir property is missing" />
     <Error Condition="'$(IntermediateOutputPath)' == ''" Text="The IntermediateOutputPath property is missing" />
 
-    <GetOutdatedFiles FileList="@(SolCompile)" UpToDateMarker="@(CopyUpToDateMarker)">
+    <GetOutdatedFiles FileList="@(SolFiles)" UpToDateMarker="@(CopyUpToDateMarker)">
       <Output TaskParameter="Result" ItemName="ChangedFiles"/>
     </GetOutdatedFiles>
 
@@ -104,13 +107,13 @@
       <AbiFiles Include="$(IntermediateOutputPath)/*.abi"/>
     </ItemGroup>
 
-    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" Condition="'@(ChangedFiles)' != ''">
-      <Output TaskParameter="CopiedFiles" ItemName="ReferencesCopiedInThisBuild"/>
+    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true">
+      <Output TaskParameter="CopiedFiles" ItemName="BinFilesCopiedInThisBuild"/>
     </Copy>
-    <Copy SourceFiles="@(AbiFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" Condition="'@(ChangedFiles)' != ''">
-      <Output TaskParameter="CopiedFiles" ItemName="ReferencesCopiedInThisBuild"/>
+    <Copy SourceFiles="@(AbiFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true">
+      <Output TaskParameter="CopiedFiles" ItemName="AbiFilesCopiedInThisBuild"/>
     </Copy>
-    <Touch Files="@(CopyUpToDateMarker)" AlwaysCreate="true" Condition="'@(ReferencesCopiedInThisBuild)' != ''" />
+    <Touch Files="@(CopyUpToDateMarker)" AlwaysCreate="true" Condition="'@(BinFilesCopiedInThisBuild)'!='' or '@(AbiFilesCopiedInThisBuild)'!=''" />
   </Target>
 
   <Target Name="Clean">

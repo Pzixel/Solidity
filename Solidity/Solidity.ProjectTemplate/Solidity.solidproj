@@ -6,6 +6,7 @@
   <Import Project="$(CustomProjectExtensionsPath)Solidity.props" />
   <ItemGroup>
     <SolCompile Include="**\*.sol" />
+    <SolCompile Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(CustomProjectExtensionsPath)Solidity.targets" />
 </Project>

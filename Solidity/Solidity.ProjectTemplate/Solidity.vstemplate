@@ -15,6 +15,7 @@
   <TemplateContent>
     <Project File="Solidity.solidproj" ReplaceParameters="true">
       <ProjectItem OpenInEditor="true">Example.sol</ProjectItem>
+      <ProjectItem OpenInEditor="true">Readme.md</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>
