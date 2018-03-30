@@ -8,3 +8,4 @@ Because `solidproj` cannot be referenced directly, you have to follow these step
 xcopy "$(SolutionDir)$safeprojectname$\bin\$(ConfigurationName)\*.abi" "$(TargetDir)" /Y /I
 xcopy "$(SolutionDir)$safeprojectname$\bin\$(ConfigurationName)\*.bin" "$(TargetDir)" /Y /I
 ```
+3. Delete this readme
