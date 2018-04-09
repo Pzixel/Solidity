@@ -29,4 +29,5 @@ Because `solidproj` cannot be referenced directly, you have to follow these step
 dotnet publish /p:SolutionDir=C:\Full\Path\To\The\Project\ -c Release
 ```
 Rememer that path should end with backslash `\`
+
 4. Delete this readme
