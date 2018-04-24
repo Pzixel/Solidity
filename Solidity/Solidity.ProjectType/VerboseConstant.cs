@@ -7,7 +7,7 @@
             "event", "abstract", "anonymous", "as", "assembly", "break", "case", "catch", "constant", "continue", "default", "delete", "do", "else", "emit",
             "enum", "external", "final", "for", "function", "if", "import", "in", "indexed", "inline", "interface", "internal", "is", "let", "match", "memory",
             "modifier", "new", "of", "payable", "pragma", "private", "public", "pure", "relocatable", "return", "returns", "static", "storage", "struct",
-            "throw", "try", "type", "typeof", "using", "var", "view", "while", "contract", "library", "interface", "true", "false", "this", "super"
+            "throw", "try", "type", "typeof", "using", "var", "view", "while", "contract", "library", "interface", "true", "false", "this", "super", "constructor"
         };
 
         public static readonly string[] BuiltinTypes =
