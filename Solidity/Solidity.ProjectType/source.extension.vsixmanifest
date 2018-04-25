@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="Solidity.ProjectType..de25e82d-9e1d-48a1-8e86-26b9582126fc" Version="1.0.21" Language="en-US" Publisher="Solidity.ProjectType" />
+        <Identity Id="Solidity.ProjectType..de25e82d-9e1d-48a1-8e86-26b9582126fc" Version="1.0.25" Language="en-US" Publisher="Solidity.ProjectType" />
         <DisplayName>Solidity VSIX</DisplayName>
         <Description xml:space="preserve">A template for creating a Solidity project.</Description>
     </Metadata>
