@@ -71,7 +71,7 @@ namespace Solidity
             }
 
             string fullFileText = span.Snapshot.GetText();
-            var contracts = Regex.Matches(fullFileText, @"(?:contract|struct)\W+([\w_]+)", RegexOptions.Compiled).Cast<Match>().Select(x => x.Groups[1].Value);
+            var contracts = Regex.Matches(fullFileText, @"(?:contract|struct|enum)\W+([\w_]+)", RegexOptions.Compiled).Cast<Match>().Select(x => x.Groups[1].Value);
             var matchingItems = new Regex($@"\b({string.Join("|", contracts)})\b");
             AddMatchingHighlighting(matchingItems, text, line, list, _typeClassification);
 
