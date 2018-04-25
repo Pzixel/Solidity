@@ -16,22 +16,27 @@ namespace Solidity
         [Export(typeof(ClassificationTypeDefinition))]
         [Name(Classification.SolComment)]
         [BaseDefinition(PredefinedClassificationTypeNames.Comment)]
-        private static ClassificationTypeDefinition commentTypeDefinition;
+        private static ClassificationTypeDefinition _commentTypeDefinition;
 
         [Export(typeof(ClassificationTypeDefinition))]
         [Name(Classification.SolString)]
         [BaseDefinition(PredefinedClassificationTypeNames.String)]
-        private static ClassificationTypeDefinition stringTypeDefinition;
+        private static ClassificationTypeDefinition _stringTypeDefinition;
 
         [Export(typeof(ClassificationTypeDefinition))]
         [Name(Classification.SolNumber)]
         [BaseDefinition(PredefinedClassificationTypeNames.Number)]
-        private static ClassificationTypeDefinition numberTypeDefinition;
+        private static ClassificationTypeDefinition _numberTypeDefinition;
 
         [Export(typeof(ClassificationTypeDefinition))]
         [Name(Classification.SolKeyword)]
         [BaseDefinition(PredefinedClassificationTypeNames.Keyword)]
-        private static ClassificationTypeDefinition keywordTypeDefinition;
+        private static ClassificationTypeDefinition _keywordTypeDefinition;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name(Classification.SolType)]
+        [BaseDefinition(PredefinedClassificationTypeNames.Type)]
+        private static ClassificationTypeDefinition _typeTypeDefinition;
 
 #pragma warning restore 169
     }

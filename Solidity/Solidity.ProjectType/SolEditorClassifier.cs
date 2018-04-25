@@ -13,6 +13,7 @@ namespace Solidity
     internal class SolKeyword : IClassifier
     {
         private readonly List<(Regex, IClassificationType)> _map;
+        private readonly IClassificationType _typeClassification;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SolKeyword"/> class.
@@ -22,12 +23,15 @@ namespace Solidity
         {
             _map = new List<(Regex, IClassificationType)>
             {
-                (new Regex(@"/\*.+\*/", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolComment)),
+                (new Regex(@"/\*.+\*/", RegexOptions.Compiled | RegexOptions.Multiline), registry.GetClassificationType(Classification.SolComment)),
+                (new Regex(@"//.+", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolComment)),
                 (new Regex(@""".*?""", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolString)),
                 (new Regex($@"\b({string.Join("|", VerboseConstant.BuiltinTypes.Concat(VerboseConstant.Keywords))})\b", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolKeyword)),
                 (new Regex($@"\b({VerboseConstant.Operators})\b", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolKeyword)),
-                (new Regex(@"-?(\d+(\.\d*)*)|(\.\d+)", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolNumber)),
+                (new Regex(@"\b-?(\d+(\.\d*)*)|(\.\d+)", RegexOptions.Compiled), registry.GetClassificationType(Classification.SolNumber)),
             };
+
+            _typeClassification = registry.GetClassificationType(Classification.SolType);
         }
 
         #region IClassifier
@@ -63,18 +67,28 @@ namespace Solidity
 
             foreach (var tuple in _map)
             {
-                foreach (Match match in tuple.Item1.Matches(text))
-                {
-                    var str = new SnapshotSpan(line.Snapshot, line.Start.Position + match.Index, match.Length);
-
-                    if (list.Any(s => s.Span.IntersectsWith(str)))
-                        continue;
-
-                    list.Add(new ClassificationSpan(str, tuple.Item2));
-                }
+                AddMatchingHighlighting(tuple.Item1, text, line, list, tuple.Item2);
             }
 
+            string fullFileText = span.Snapshot.GetText();
+            var contracts = Regex.Matches(fullFileText, @"contract\W+([\w_]+)", RegexOptions.Compiled).Cast<Match>().Select(x => x.Groups[1].Value);
+            var matchingItems = new Regex($@"\b({string.Join("|", contracts)})\b");
+            AddMatchingHighlighting(matchingItems, text, line, list, _typeClassification);
+
             return list;
+        }
+
+        private static void AddMatchingHighlighting(Regex regex, string text, ITextSnapshotLine line, ICollection<ClassificationSpan> list, IClassificationType classificationType)
+        {
+            foreach (Match match in regex.Matches(text))
+            {
+                var str = new SnapshotSpan(line.Snapshot, line.Start.Position + match.Index, match.Length);
+
+                if (list.Any(s => s.Span.IntersectsWith(str)))
+                    continue;
+
+                list.Add(new ClassificationSpan(str, classificationType));
+            }
         }
 
         #endregion
