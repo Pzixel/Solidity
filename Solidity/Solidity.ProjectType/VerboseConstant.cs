@@ -7,7 +7,8 @@
             "event", "abstract", "anonymous", "as", "assembly", "break", "case", "catch", "constant", "continue", "default", "delete", "do", "else", "emit",
             "enum", "external", "final", "for", "function", "if", "import", "in", "indexed", "inline", "interface", "internal", "is", "let", "match", "memory",
             "modifier", "new", "of", "payable", "pragma", "private", "public", "pure", "relocatable", "return", "returns", "static", "storage", "struct",
-            "throw", "try", "type", "typeof", "using", "var", "view", "while", "contract", "library", "interface", "true", "false", "this", "super", "constructor"
+            "throw", "try", "type", "typeof", "using", "var", "view", "while", "contract", "library", "interface", "true", "false", "this", "super", "constructor",
+            "require", "assert", "revert"
         };
 
         public static readonly string[] BuiltinTypes =
@@ -134,7 +135,7 @@
             "string22", "string23", "string24", "string25", "string26", "string27", "string28", "string29", "string30", "string31", "string32", "byte", "bytes",
             "bytes1", "bytes2", "bytes3", "bytes4", "bytes5", "bytes6", "bytes7", "bytes8", "bytes9", "bytes10", "bytes11", "bytes12", "bytes13", "bytes14",
             "bytes15", "bytes16", "bytes17", "bytes18", "bytes19", "bytes20", "bytes21", "bytes22", "bytes23", "bytes24", "bytes25", "bytes26", "bytes27",
-            "bytes28", "bytes29", "bytes30", "bytes31", "bytes32"
+            "bytes28", "bytes29", "bytes30", "bytes31", "bytes32", "sha256", "keccak256"
         };
 
         public const string Operators =
